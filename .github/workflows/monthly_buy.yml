@@ -2,10 +2,8 @@ name: Monthly BTC Accumulator (GMO Coin)
 
 on:
   schedule:
-    # 毎朝 UTC 0:00（日本時間 午前9:00）に自動実行
-    - cron: '0 0 * * *'
-  # GitHub上の画面から手動実行できるようにする設定（テスト用）
-  workflow_dispatch:
+    - cron: '0 0 * * *'  # 毎朝 JST 9:00 (UTC 0:00)
+  workflow_dispatch:      # 手動実行
 
 jobs:
   buy-btc:
@@ -25,9 +23,12 @@ jobs:
           python -m pip install --upgrade pip
           pip install ccxt
 
-      - name: 自動購入スクリプトの実行
+      - name: 自動購入スクリプトの実行とメール通知
         env:
           GMO_API_KEY: ${{ secrets.GMO_API_KEY }}
           GMO_SECRET_KEY: ${{ secrets.GMO_SECRET_KEY }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          TO_EMAIL: ${{ secrets.TO_EMAIL }}
         run: |
           python buy_btc.py
