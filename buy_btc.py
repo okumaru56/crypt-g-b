@@ -39,7 +39,7 @@ def send_email(subject, body):
         print(f"メール送信に失敗しました: {e}")
 
 # GMOコイン APIの初期化
-exchange = ccxt.gmo({
+exchange = ccxt.gmojapan({
     'apiKey': API_KEY,
     'secret': SECRET_KEY,
     'enableRateLimit': True,
