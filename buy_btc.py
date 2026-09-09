@@ -72,9 +72,16 @@ def main():
     date_str = today.strftime('%Y-%m-%d')
     
     # テスト時等で日付判定をスキップしたい場合は if文をコメントアウトしてください
+        # 毎月1日以外は積立スキップ通知を送信して終了
     if today.day != 1:
-        print(f"本日は {date_str} です。積立指定日ではないため終了します。")
+        skip_msg = f"本日は {date_str} です。積立指定日（毎月1日）ではないため、本日の買付処理はスキップされました。"
+        print(skip_msg)
+        send_email(
+            subject=f"【対象外】BTC自動積立スキップ通知 ({date_str})",
+            body=skip_msg
+        )
         return
+
 
     jpy_budget = 3000
     symbol = 'BTC'
