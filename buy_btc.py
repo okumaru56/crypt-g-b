@@ -76,7 +76,7 @@ def main():
         print(f"本日は {date_str} です。積立指定日ではないため終了します。")
         return
 
-    jpy_budget = 10000 
+    jpy_budget = 3000
     symbol = 'BTC'
 
     try:
