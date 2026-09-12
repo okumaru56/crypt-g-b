@@ -1,4 +1,4 @@
-name: Monthly ETH Accumulator (GMO Coin)
+name: Weekly ETH Accumulator (GMO Coin)
 
 on:
   schedule:
