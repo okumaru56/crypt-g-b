@@ -71,9 +71,9 @@ def main():
     today = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9)))
     date_str = today.strftime('%Y-%m-%d')
     
-    # 毎月1日以外はスキップ通知を送信して終了
-    if today.day != 1:
-        skip_msg = f"本日は {date_str} です。積立指定日（毎月1日）ではないため、本日の買付処理はスキップされました。"
+    # 毎週火曜以外はスキップ通知を送信して終了
+    if today.weekday() != 1:
+        skip_msg = f"本日は {date_str} です。積立指定日（毎火曜日）ではないため、本日の買付処理はスキップされました。"
         print(skip_msg)
         send_email(
             subject=f"【対象外】ETH自動積立スキップ通知 ({date_str})",
@@ -81,7 +81,7 @@ def main():
         )
         return
 
-    jpy_budget = 10000 
+    jpy_budget = 5000 
     symbol = 'ETH'
 
     try:
